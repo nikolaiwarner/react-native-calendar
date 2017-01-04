@@ -23,6 +23,7 @@ export default class Calendar extends Component {
   };
 
   static propTypes = {
+    alwaysStyleCurrentDayCircle: PropTypes.bool,
     currentMonth: PropTypes.any,
     customStyle: PropTypes.object,
     dayHeadings: PropTypes.array,
@@ -52,6 +53,7 @@ export default class Calendar extends Component {
   };
 
   static defaultProps = {
+    alwaysStyleCurrentDayCircle: false,
     customStyle: {},
     width: DEVICE_WIDTH,
     dayHeadings: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
@@ -190,6 +192,7 @@ export default class Calendar extends Component {
       if (dayIndex >= 0 && dayIndex < argMonthDaysCount) {
         days.push((
           <Day
+            alwaysStyleCurrentDayCircle={this.props.alwaysStyleCurrentDayCircle}
             startOfMonth={startOfArgMonthMoment}
             isWeekend={isoWeekday === 0 || isoWeekday === 6}
             key={`${renderIndex}`}

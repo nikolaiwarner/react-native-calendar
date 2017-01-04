@@ -14,6 +14,7 @@ export default class Day extends Component {
   }
 
   static propTypes = {
+    alwaysStyleCurrentDayCircle: PropTypes.bool,
     caption: PropTypes.any,
     customStyle: PropTypes.object,
     filler: PropTypes.bool,
@@ -29,11 +30,20 @@ export default class Day extends Component {
     const { customStyle } = this.props;
     const dayCircleStyle = [styles.dayCircleFiller, customStyle.dayCircleFiller];
 
-    if (isSelected) {
+    if (this.props.alwaysStyleCurrentDayCircle) {
       if (isToday) {
         dayCircleStyle.push(styles.currentDayCircle, customStyle.currentDayCircle);
-      } else {
+      }
+      if (isSelected) {
         dayCircleStyle.push(styles.selectedDayCircle, customStyle.selectedDayCircle);
+      }
+    } else {
+      if (isSelected) {
+        if (isToday) {
+          dayCircleStyle.push(styles.currentDayCircle, customStyle.currentDayCircle);
+        } else {
+          dayCircleStyle.push(styles.selectedDayCircle, customStyle.selectedDayCircle);
+        }
       }
     }
 
